@@ -9,7 +9,7 @@ import { setupVite, serveStatic, log } from "./vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express(); // ✅ Initialize express
+const app = express();
 
 // ✅ Serve static files from public and Attached_Assets folders
 app.use(express.static(path.join(__dirname, "../client/public")));
@@ -48,30 +48,22 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// ✅ Main async function
-(async () => {
-  const server = await registerRoutes(app);
+// ✅ Apply routes
+await registerRoutes(app);
 
-  // ✅ Error handler
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    res.status(status).json({ message });
-    throw err;
-  });
+// ✅ Error handler
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+  throw err;
+});
 
-  // ✅ Use Vite middleware or serve static based on environment
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+// ✅ Production mode (for Vercel)
+if (process.env.NODE_ENV === "production") {
+  serveStatic(app);
+}
 
-  // ✅ Start server (Windows-compatible)
-  const port = parseInt(process.env.PORT || "5000", 10);
-  const host = "127.0.0.1";
-
-  server.listen(port, host, () => {
-    log(`🚀 Serving on http://${host}:${port}`);
-  });
-})();
+// ❌ DO NOT start server with app.listen()
+// ✅ Instead, export the handler
+export default app;
