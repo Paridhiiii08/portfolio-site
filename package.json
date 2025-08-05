@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "scripts": {
-    "dev": "vite",
-    "dev:server": "tsx server/index.ts",
-    "build": "tsc && vite build",
-    "start": "node dist/server/index.js",
-    "check": "tsc",
-    "preview": "vite preview",
-    "db:push": "drizzle-kit push"
-  },
+ "scripts": {
+  "dev": "vite",
+  "dev:server": "tsx server/index.ts",
+  "build": "vite build",
+  "start": "node server/index.ts"
+},
+  
   "engines": {
     "node": "22.x"
   },

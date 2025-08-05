@@ -1,6 +1,14 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/public/index.html" }
+  "builds": [
+    {
+      "src": "server/index.ts",
+      "use": "@vercel/node"
+    }
   ],
-  "cleanUrls": true
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server/index.ts"
+    }
+  ]
 }
