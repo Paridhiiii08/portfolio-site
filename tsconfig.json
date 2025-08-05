@@ -1,15 +1,21 @@
 {
-  "include": ["server/**/*"],
+  "include": ["server/**/*", "shared/**/*"], // ✅ Include shared folder
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "outDir": "dist/server",
-    "rootDir": "server",
+    "rootDir": ".",  
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    // ✅ Add these two lines
+    "baseUrl": ".", 
+    "paths": {
+      "@shared/*": ["shared/*"]
+    }
   }
 }
