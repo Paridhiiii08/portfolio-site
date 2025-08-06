@@ -2,7 +2,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { registerRoutes } from "./routes";
+import { registerRoutes } from "./routes.js"; // ✅ Add `.js` extension
 import { setupVite, serveStatic, log } from "./vite";
 
 // Fix __dirname for ES Modules

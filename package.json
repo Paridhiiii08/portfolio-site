@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-"scripts": {
-  "dev": "vite",
-  "dev:server": "tsx server/index.ts",
-  "build": "vite build",
-  "start": "node server/index.js"
-},
-"engines": {
-  "node": "22.x"
-},
-
+  "scripts": {
+    "dev": "vite",
+    "dev:server": "tsx server/index.ts",
+    "build": "vite build",
+    "start": "node server/index.js"
+  },
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^3.10.0",
